@@ -114,3 +114,114 @@ function tinhTienDien(soKw) {
 
     return tienDien;
 }
+
+
+//Bài 3: Tính thuế thu nhập cá nhân
+
+document.getElementById('btnTinhThue').onclick = function () {
+    //input: name (string), tongThuNhap (number), soNguoiPhuThuoc (number)
+    var name = document.getElementById('name').value;
+    var tongThuNhap = +document.getElementById('tongThuNhap').value;
+    var soNguoiPhuThuoc = +document.getElementById('soNguoiPhuThuoc').value;
+
+    //output: taxAmount (number)
+
+    var taxAmount = taxCal(tongThuNhap, soNguoiPhuThuoc);
+
+    //progress:
+
+    //in output ra giao diện
+    document.getElementById('ketQua_B3').innerHTML = 'Họ tên: ' + name + ' Tiền thuế thu nhập cá nhân: ' + new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(taxAmount);
+}
+
+function taxCal (tongThuNhap, soNguoiPhuThuoc) {
+    var thuNhapChiuThue = 0;
+
+    thuNhapChiuThue = tongThuNhap - 4e+6 - soNguoiPhuThuoc*1.6e+6;
+    
+    if (thuNhapChiuThue <= 60e+6) {
+        taxAmount = thuNhapChiuThue*0.05 ;
+    }else if (thuNhapChiuThue > 60e+6 && thuNhapChiuThue <= 120e+6) {
+        taxAmount = 60e+6*0.05 + (thuNhapChiuThue - 60e+6)*0.1;
+    } else if (thuNhapChiuThue > 120e+6 && thuNhapChiuThue <= 210e+6) {
+        taxAmount = 60e+6*0.05 + 90e+6*0.1 + (thuNhapChiuThue - 150e+6)*0.15;
+    } else if (thuNhapChiuThue > 21e+8 && thuNhapChiuThue <= 384e+6) {
+        taxAmount = 60e+6*0.05 + 90e+6*0.1 + 174e+6*0.15 (thuNhapChiuThue - 324e+6)*0.2;
+    } else if (thuNhapChiuThue > 384e+6 && thuNhapChiuThue <= 624e+6) {
+        taxAmount = 60e+6*0.05 + 90e+6*0.1 + 174e+6*0.15 + 240e+6*0.2 (thuNhapChiuThue - 564e+6)*0.25;
+
+    } else if (thuNhapChiuThue > 624e+6 && thuNhapChiuThue <= 960e+6) {
+        taxAmount = 60e+6*0.05 + 90e+6*0.1 + 174e+6*0.15 + 240e+6*0.2 + 336e+6*0.25  (thuNhapChiuThue - 900e+6)*0.3;
+
+    } else if (thuNhapChiuThue > 960e+6) {
+        taxAmount = 60e+6*0.05 + 90e+6*0.1 + 174e+6*0.15 + 240e+6*0.2 + 336e+6*0.25 + 60e+6*0.3 (thuNhapChiuThue - 960e+6)*0.35;
+    } else {
+        taxAmount = null;
+    }
+
+    return taxAmount;
+}
+
+//Bài 4:
+document.getElementById('userType').onchange = function(){ disableInput() };
+
+function disableInput (){
+    var option = document.getElementById('userType').value;
+    var connections = document.getElementById('connections');
+    if (option == "business"){
+        connections.style.display = "block";
+    } else {
+        connections.style.display = "none";
+    }
+
+}
+
+document.getElementById('btnTinhCap').onclick = function (){
+    var userType = document.getElementById('userType').value;
+    var userID = document.getElementById('userID').value;
+    var premiumChannel = +document.getElementById('premiumChannel').value;
+    var ketNoi = +document.getElementById('connections').value;
+
+    //output: 
+
+    var tienCap = 0;
+
+    //progress:
+
+    if (userType == "personal"){
+        tienCap = tinhTienPersonal (premiumChannel);
+    } else if (userType == "business"){
+        tienCap = tinhTienBusiness (premiumChannel, ketNoi);
+    } else {
+        tienCap = null;
+    }
+
+    //in output ra giao diện
+
+    document.getElementById('ketQua_B4').innerHTML = 'Khách hàng ' + userType + ' ID: ' + userID + ' Tiền cáp: ' + tienCap +'$';
+}
+
+function tinhTienPersonal (premiumChannel) {
+    const billingFee = 4.5;
+    const serviceFee = 20.5;
+    const premiumCFee = 7.5;
+
+    tienCap = billingFee + serviceFee + premiumCFee*premiumChannel;
+
+    return tienCap;
+}
+
+function tinhTienBusiness (premiumChannel, ketNoi){
+    const billingFee = 15;
+    const premiumCFee = 50;
+    var serviceFee = 0;
+    if (ketNoi <= 10){
+        serviceFee = 75;
+    } if (ketNoi > 10){
+        serviceFee = 75 + (ketNoi - 10)*5;
+    }
+
+    tienCap = billingFee + serviceFee + premiumCFee*premiumChannel;
+
+    return tienCap;
+}

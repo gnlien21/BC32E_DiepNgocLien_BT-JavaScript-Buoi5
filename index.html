@@ -58,7 +58,6 @@
       <div class="form-group row">
         <div class="col-4">
           <input class="form-control" id="hoTen" placeholder="Nhập họ tên"/>
-
         </div>
         <div class="col-4">
           <input class="form-control col-4" id="soKw" tpe="number" placeholder="Nhập số Kw"/>
@@ -68,6 +67,47 @@
       <button id="btnTinhTienDien" class="btn btn-success">Tính tiền điện</button>
       <div id="ketQua_B2" class="alert alert-success mt-3"></div>
     </div>
+    <div class="mt-5">
+      <h3>Bài 3: Tính thuế thu nhập cá nhân</h3>
+      <div class="form-group row">
+        <div class="col-4">
+          <input class="form-control" id="name" placeholder = "Nhập họ tên" />
+        </div>
+        <div class="col-4">
+          <input class="form-control" id="tongThuNhap" type="number" placeholder="Tổng thu nhập"/>
+        </div>
+        <div class="col-4">
+          <input class="form-control" id="soNguoiPhuThuoc" type=number placeholder="Số người phụ thuộc"/>
+        </div>
+      </div>
+      <button id="btnTinhThue" class="btn btn-success mt-3">Tính thuế</button>
+      <div id="ketQua_B3" class="alert alert-success mt-3"></div>
+    </div>
+
+    <div class="mt-5">
+      <h3>Bài 4: Tính tiền cáp</h3>
+      <div class="form-group row">
+        <div class="col-4">
+          <select id="userType">
+            <option>Chọn loại khách hàng</option>
+            <option value="personal">Người dân</option>
+            <option value="business">Doanh nghiệp</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <input class="form-control" id="userID" placeholder="Nhập mã khách hàng"/>
+        </div>
+        <div class="col-4">
+          <input class="form-control" id="premiumChannel" type="number" placeholder="Nhập số kênh cao cấp"/>
+        </div>
+        <div class="col-4">
+          <input class="form-control" id="connections" type="number" placeholder="Nhập số kết nối">
+        </div>
+      </div>
+      <button id="btnTinhCap" class="btn btn-success mt-3">Tính tiền cáp</button>
+      <div id="ketQua_B4" class="alert alert-success mt-3"></div>
+    </div>
+
   </div>
 
   <!-- Optional JavaScript -->
